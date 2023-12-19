@@ -155,7 +155,12 @@ public class PrizeServiceImpl implements IPrizeService {
         }
 
         //3：把奖品数据减少
-        randomPrize.setStock(randomPrize.getStock() - 1);
+        if("Y".equals(randomPrize.getWin())){
+            randomPrize.setStock(randomPrize.getStock() - 1);
+        }else{
+            randomPrize.setStock(randomPrize.getStock() > 0 ? (randomPrize.getStock()-1) : 0);
+        }
+
         prizeMapper.updatePrize(randomPrize);
 
 
